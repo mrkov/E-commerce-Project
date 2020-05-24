@@ -39,7 +39,7 @@ class App extends Component {
         })
       }else {
         //this means user is null - same as: currentUser: null
-        // vise nema stanja, zbog redux: this.setState({currentUser: userAuth})
+        // vise nema this.setState({currentUser: userAuth}), zbog reduxa
         setCurrentUser(userAuth);
       }
 

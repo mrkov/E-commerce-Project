@@ -6,9 +6,11 @@ import { connect } from 'react-redux'
 
 import {ReactComponent as Logo} from '../../assets/crown.svg'
 import './header.styles.scss'
+import CartIcon from '../cart-icon/CartIcon'
+import CartDropdown from '../cart-dropdown/CartDropdown'
 
 
-function Header({currentUser}) {
+function Header({currentUser, hidden}) {
     return (
         <div className='header'>
             <Link className='logo-container' to='/'>
@@ -30,7 +32,14 @@ function Header({currentUser}) {
                         SIGN IN
                     </Link>
                 }
+                <CartIcon />
             </div>
+            {
+                hidden ?
+                null
+                :
+                <CartDropdown />
+            }
         </div>
     )
 }
@@ -38,7 +47,8 @@ function Header({currentUser}) {
 //od connecta dobija root-reducer kao argument, koji sadrzi sve reducer-e
 const mapStateToProps = (state) => {
     return {
-        currentUser: state.user.currentUser
+        currentUser: state.user.currentUser,
+        hidden: state.cart.hidden
     }
 }
 

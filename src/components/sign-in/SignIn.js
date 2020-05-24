@@ -25,7 +25,7 @@ export default class SignIn extends Component {
             await auth.signInWithEmailAndPassword(email, password)
             
         }catch(error){
-            console.log('error signing in: ', error)
+            alert(error.message)
         }
         this.setState({email: '', password: ''} )
     }
