@@ -8,7 +8,7 @@ import {ReactComponent as Logo} from '../../assets/crown.svg'
 import './header.styles.scss'
 
 
-export default function Header({currentUser}) {
+function Header({currentUser}) {
     return (
         <div className='header'>
             <Link className='logo-container' to='/'>
@@ -34,3 +34,12 @@ export default function Header({currentUser}) {
         </div>
     )
 }
+
+//od connecta dobija root-reducer kao argument, koji sadrzi sve reducer-e
+const mapStateToProps = (state) => {
+    return {
+        currentUser: state.user.currentUser
+    }
+}
+
+export default connect(mapStateToProps)(Header)
