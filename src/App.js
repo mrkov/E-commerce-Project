@@ -22,7 +22,6 @@ class App extends Component {
   unsubscribeFromAuth = null;
   
   componentDidMount(){
-
     const {setCurrentUser} = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -60,12 +59,14 @@ class App extends Component {
       <Header />
       
       <Switch>
-      <Route exact path='/' component={HomePage} />
-      <Route exact path='/shop' component={ShopPage} />
-      <Route
-        exact
-        path='/signIn' 
-        render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+        <Route exact  path='/' component={HomePage} />
+        <Route exact path='/shop' component={ShopPage} />
+        <Route
+          exact
+          path='/signIn' 
+          render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />
+        
+        
       </Switch>
 
     </div>
