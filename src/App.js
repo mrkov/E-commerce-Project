@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import HomePage from './pages/homepage/HomePage';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
-import ShopPage from './pages/shop-page/ShopPage';
+
 import Header from './components/header/Header';
+import ShopPage from './pages/shop-page/ShopPage';
+import HomePage from './pages/homepage/HomePage';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up-page/SignInAndSignUpPage';
+import CheckoutPage from './pages/checkout-page/CheckoutPage';
+
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { setCurrentUser } from './redux/user/user.actions'
+import { selectCurrentUser } from "./redux/user/user.selectors";
+import { createStructuredSelector } from "reselect";
 
 class App extends Component {
   // nije vise potreban konstruktor sa stanjem, jer je pomereno u redux
@@ -41,10 +46,6 @@ class App extends Component {
         // vise nema this.setState({currentUser: userAuth}), zbog reduxa
         setCurrentUser(userAuth);
       }
-
-
-
-      
     })
 
   }
@@ -61,6 +62,7 @@ class App extends Component {
       <Switch>
         <Route exact  path='/' component={HomePage} />
         <Route exact path='/shop' component={ShopPage} />
+        <Route exact path='/shop/checkout' component={CheckoutPage} />
         <Route
           exact
           path='/signIn' 
@@ -74,8 +76,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = (dispatch) => ({
