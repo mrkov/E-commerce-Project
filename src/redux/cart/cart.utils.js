@@ -31,3 +31,25 @@ export const countItemsInCart = (cartItems) => {
         )
     )
 }
+
+export const removeItemFromCart = (cartItems, id) => {
+
+    return cartItems.filter(item => item.id !== id)   
+}
+
+export const reduceItemQuantity = (cartItems, id) => {
+
+    return cartItems.map(item => {
+        if(item.id === id){
+            return {
+                ...item,
+                quantity: item.quantity > 1 ?
+                item.quantity - 1
+                :
+                item.quantity
+            };
+        }
+        return item;
+    })
+
+}
